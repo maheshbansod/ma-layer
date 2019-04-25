@@ -7,20 +7,26 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    stbi_set_flip_vertically_on_load(true);
+
     Game game("Space invaders");
 
-    GLFWwindow * window = glfwCreateWindow(game.width, game.height,game.title.c_str(), NULL, NULL);
+   GLFWwindow * window = glfwCreateWindow(game.width, game.height,game.title.c_str(), NULL, NULL);
+   // GLFWwindow * window = glfwCreateWindow(800, 600,"test", NULL, NULL);
     if(window == NULL) {
-        std::cout << ("COuldn't create window\n") << std::endl;
+        std::cout << ("Couldn't create window\n") << std::endl;
         return -1;
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, game.framebuffer_size_callback);
 
+
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    game.init();
 
     glClearColor(0,0,0,1);
 
