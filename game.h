@@ -5,6 +5,8 @@
 #include <vector>
 #include <map>
 
+class Drawable;
+
 class Game {
 public:
     int width, height; //window height and width
@@ -17,6 +19,8 @@ public:
     std::map<std::string,Sprite*> sprites;
 
     std::vector<Drawable*> drawables;
+
+    Drawable *me;
 
     void loadSprites();
     void loadDrawables();

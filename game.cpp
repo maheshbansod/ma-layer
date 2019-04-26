@@ -12,8 +12,8 @@ void Game::loadSprites() {
 }
 
 void Game::loadDrawables() {
-    Drawable *meship = new Drawable(sprites["meship"]);
-    drawables.push_back(meship);
+    me = new Drawable(sprites["meship"]);
+    drawables.push_back(me);
 }
 
 void Game::init() {
@@ -21,10 +21,10 @@ void Game::init() {
     shader = new Shader("imgshader.vs","imgshader.fs");
 
     float vertices[] = {
-		 0.5,  0.5, 0,  1,0,0,  1,1,
-		 0.5, -0.5, 0,  0,1,0,  1,0,
-		-0.5, -0.5, 0,  0,1,0,  0,0,
-		-0.5,  0.5, 0,  0,0,1,  0,1
+		 1,  1, 0,  1,0,0,  1,1,
+		 1, -1, 0,  0,1,0,  1,0,
+		-1, -1, 0,  0,1,0,  0,0,
+		-1,  1, 0,  0,0,1,  0,1
 	};
 
 	unsigned int indices[] = {
@@ -54,11 +54,14 @@ void Game::init() {
 	glVertexAttribPointer(2,2,GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(6*sizeof(float)));
 	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	//glBindVertexArray(0);
 
     loadSprites();
     loadDrawables();
+
+    me->x = 50;
+    me->y = 500;
 }
 
 Game::Game(std::string title, int width, int height) {
@@ -71,9 +74,11 @@ Game::Game(std::string title, int width, int height) {
 void Game::draw() {
     shader->use();
 
+    glBindVertexArray(VAO);
+
     for(std::vector<Drawable*>::iterator it = drawables.begin();it != drawables.end();it++) {
         if((*it)->todraw) {
-            (*it)->draw(shader);
+            (*it)->draw(this);
         }
     }
 }

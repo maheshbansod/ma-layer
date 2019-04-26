@@ -1,6 +1,8 @@
 #ifndef DRAWABLE_H_INCLUDED
 #define DRAWABLE_H_INCLUDED
 
+#include "game.h"
+
 class Drawable {
 public:
     bool todraw=true;
@@ -8,7 +10,7 @@ public:
     Sprite *sprite;
 
     Drawable(Sprite *s, int x = 0, int y = 0);
-    void draw(Shader *shader);
+    void draw(Game *game);
 
     void setPosition(int x, int y);
     void setSize(int width, int height);

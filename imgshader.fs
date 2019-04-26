@@ -4,8 +4,11 @@ out vec4 FragColor;
 in vec4 aColor;
 in vec2 texPosition;
 
-uniform sampler2D ourTexture;
+uniform sampler2D texture1;
 
 void main() {
-	FragColor = texture(ourTexture, texPosition)*aColor;
+	vec4 texColor = texture(texture1, texPosition);//*aColor;
+	if(texColor.a < 0.1)
+        discard;
+	FragColor = texColor;
 }
