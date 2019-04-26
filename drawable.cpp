@@ -21,14 +21,9 @@ void Drawable::draw(Game *game) {
     view = glm::translate(view, glm::vec3(-1,-1,0));
     view = glm::scale(view, glm::vec3(1/(float)game->width, 1/(float)game->height,1));
 
-    //model = glm::translate(model, glm::vec3(x/(float)game->width,y/(float)game->height, 0));
     model = glm::translate(model, glm::vec3(x,y,0));
+    model = glm::rotate(model, glm::radians(angle), glm::vec3(0,0,-1));
     model = glm::scale(model, glm::vec3(width, height, 1));
-    //model = glm::scale(model, glm::vec3(width/(float)game->width,height/(float)game->height,1));
-
-
-    //std::cout << glm::to_string(model) << std::endl;
-
 
     game->shader->setMat4("model",model);
     game->shader->setMat4("view", view);

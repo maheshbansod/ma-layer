@@ -7,6 +7,7 @@ class Drawable {
 public:
     bool todraw=true;
     int x, y, width, height;
+    float angle; /**degrees*/
     Sprite *sprite;
 
     Drawable(Sprite *s, int x = 0, int y = 0);

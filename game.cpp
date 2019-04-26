@@ -60,8 +60,10 @@ void Game::init() {
     loadSprites();
     loadDrawables();
 
+    //test init code.
     me->x = 50;
     me->y = 500;
+    me->angle = 30; //30 degrees
 }
 
 Game::Game(std::string title, int width, int height) {
